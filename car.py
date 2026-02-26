@@ -99,10 +99,10 @@ class Car:
 
         #-- Fricción --
 
-        # Drag aerodinámico suave (siempre activo)
+        # Drag aerodinámico suave
         self.velocity -= self.velocity * DRAG * dt
 
-        # Rolling resistance (solo cuando no acelera)
+        # Rolling resistance (cuando no acelera)
         if not self.throttle_input and not self.reverse_input:
             rolling = 2.0 / PIXEL_TO_METER
             decel = rolling * dt
@@ -126,3 +126,4 @@ class Car:
         rotated = pygame.transform.rotate(self.image_original, self.angle)
         rect = rotated.get_rect(center=self.position - offset)
         surface.blit(rotated, rect)
+
