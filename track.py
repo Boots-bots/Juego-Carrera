@@ -59,13 +59,11 @@ class Track:
 
     def draw_overlay(self, surface, offset):
             # --- META (Línea Continua) ---
-            # Usamos self.finish_line que ya contiene los Vector2 escalados
             p1_meta, p2_meta = self.finish_line
             pygame.draw.line(surface, (255, 255, 255), p1_meta - offset, p2_meta - offset, 8)
 
-            # --- SECTORES (Líneas Rayadas) ---
+            # --- SECTORES (Línea Rayadas) ---
             for a, b in self.sectors:
-                # Calculamos la dirección y el largo del sector
                 direction = b - a
                 dist = direction.length()
                 if dist == 0: continue
@@ -73,14 +71,14 @@ class Track:
                 unit_dir = direction.normalize()
                 
                 # Configuración del rayado
-                dash_length = 15  # Largo de cada rayita blanca
+                dash_length = 15  # Largo rayita
                 gap_length = 10   # Espacio entre rayitas
                 step = dash_length + gap_length
                 
-                # Dibujamos segmentos a lo largo de la línea del sector
+                # Dibujo segmentos a lo largo de la línea del sector
                 for i in range(0, int(dist), step):
                     start_segment = a + unit_dir * i
-                    # Evitamos que la última rayita se pase del punto final
+                    # Evitar que la última rayita se pase del punto final
                     end_dist = min(i + dash_length, dist)
                     end_segment = a + unit_dir * end_dist
                     
@@ -99,3 +97,4 @@ class Track:
 
         return (ccw(p1,q1,q2) != ccw(p2,q1,q2) and
                 ccw(p1,p2,q1) != ccw(p1,p2,q2))
+
