@@ -35,7 +35,7 @@ def plot_telemetry(json_file, track_image_path):
     
     # Cargar y mostrar la imagen de la pista
     img = mpimg.imread(track_image_path)
-    # Reescalamos la imagen según el TRACK_SCALE para que coincida con las coordenadas
+    # Reescalar la imagen según el TRACK_SCALE para que coincida con las coordenadas
     h, w = img.shape[:2]
     ax.imshow(img, extent=[0, w * TRACK_SCALE, h * TRACK_SCALE, 0], alpha=0.7)
 
@@ -44,7 +44,7 @@ def plot_telemetry(json_file, track_image_path):
         # Color dinámico basado en inputs (R=Brake, G=Throttle, B=Reverse)
         color = (br[i], th[i], rev[i])
         
-        # Si no hay ningún input, usamos gris para la inercia
+        # Si no hay ningún input, gris para la inercia
         if sum(color) == 0:
             color = (0.5, 0.5, 0.5)
         else:
@@ -79,4 +79,5 @@ def plot_telemetry(json_file, track_image_path):
 
 if __name__ == "__main__":
     # plot_telemetry("best_lap_record.json", "assets/images/tracks/track_1.png")
+
     plot_telemetry("Best-Laps/L3.json", "assets/images/tracks/track_1.png")
