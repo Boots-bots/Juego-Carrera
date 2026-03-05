@@ -67,6 +67,8 @@ class Car:
 
         forward = pygame.Vector2(1,0).rotate(-self.angle)
         speed_forward = self.velocity.dot(forward)
+        right = pygame.Vector2(0,1).rotate(-self.angle)
+        speed_lateral = self.velocity.dot(right)
 
         # Rotación
         if keys[pygame.K_a] and self.velocity.length() > 2:
@@ -102,6 +104,9 @@ class Car:
         # Drag aerodinámico suave
         self.velocity -= self.velocity * DRAG * dt
 
+        # fricción lateral 
+        self.velocity -= right * spped:lateral * 0.05
+        
         # Rolling resistance (cuando no acelera)
         if not self.throttle_input and not self.reverse_input:
             rolling = 2.0 / PIXEL_TO_METER
@@ -126,4 +131,5 @@ class Car:
         rotated = pygame.transform.rotate(self.image_original, self.angle)
         rect = rotated.get_rect(center=self.position - offset)
         surface.blit(rotated, rect)
+
 
